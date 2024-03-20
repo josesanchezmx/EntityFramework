@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 //builder.Services.AddDbContext<TareasContext>(p => p.UseInMemoryDatabase("TareasDB"));
 // Configuracion para SQL Server
-builder.Services.AddSqlServer<TareasContext>("Data Source=LAPTOP-PFPGKMUG; Initial Catalog=TareasDB; Integrated Security=True; TrustServerCertificate=True");
+builder.Services.AddSqlServer<TareasContext>(builder.Configuration.GetConnectionString("cnTareas"));
 //configuracion para postgres SQL
 //builder.Services.AddNpgsql<TareasContext>(builder.Configuration.GetConnectionString("TareasDB"));
 var app = builder.Build();
