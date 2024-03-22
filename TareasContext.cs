@@ -20,14 +20,19 @@ public class TareasContext: DbContext
         categoriasInit.Add(new Categoria() { CategoriaId = Guid.Parse("19269fe4-2d5c-4d7d-bcae-6ef190b53390"), Nombre = "Actividades Personales", Peso = 20 });
 
 
-       modelBuilder.Entity<Categoria>(categoria => {
-        categoria.ToTable("Categoria");
-        categoria.HasKey(p=> p.CategoriaId);
-        categoria.Property(p=> p.Nombre).IsRequired().HasMaxLength(150);
-        categoria.Property(p=> p.Descripcion).IsRequired(false);
-        categoria.Property(p=> p.Peso);
-        categoria.HasData(categoriasInit);
-       });
+        modelBuilder.Entity<Categoria>(categoria=> 
+        {
+            categoria.ToTable("Categoria");
+            categoria.HasKey(p=> p.CategoriaId);
+
+            categoria.Property(p=> p.Nombre).IsRequired().HasMaxLength(150);
+
+            categoria.Property(p=> p.Descripcion).IsRequired(false);
+
+            categoria.Property(p=> p.Peso);
+
+            categoria.HasData(categoriasInit);
+        });
 
        List<Tarea> tareasInit = new List<Tarea>();
 
@@ -40,12 +45,11 @@ public class TareasContext: DbContext
        modelBuilder.Entity<Tarea>(tarea => {
         tarea.ToTable("Tarea");
         tarea.HasKey(p=> p.TareaId);
-        tarea.HasOne(p=> p.Categoria).WithMany(p=> p.Tareas).HasForeignKey(p=> p.CategoriaId);
+        tarea.HasOne(p=> p.Categoria).WithMany(p=> p.Tareas).HasForeignKey(p=> p.CategoriaId);;
         tarea.Property(p=> p.Titulo).IsRequired().HasMaxLength(200);
         tarea.Property(p=> p.Descripcion).IsRequired(false);
         tarea.Property(p=> p.PrioridadTarea);
         tarea.Property(p=> p.FechaCreacion);
-        tarea.Ignore(p=> p.Categoria);
         tarea.Ignore(p=> p.Resumen);
         tarea.Property(p=> p.Terminada);
         tarea.HasData(tareasInit);
