@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using proyectoef;
 
@@ -11,9 +12,11 @@ using proyectoef;
 namespace proyectoef.Migrations
 {
     [DbContext(typeof(TareasContext))]
-    partial class TareasContextModelSnapshot : ModelSnapshot
+    [Migration("20240322002029_ColumnPrioridadTarea")]
+    partial class ColumnPrioridadTarea
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,9 +66,6 @@ namespace proyectoef.Migrations
 
                     b.Property<int>("PrioridadTarea")
                         .HasColumnType("int");
-
-                    b.Property<bool>("Terminada")
-                        .HasColumnType("bit");
 
                     b.Property<string>("Titulo")
                         .IsRequired()

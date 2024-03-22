@@ -25,6 +25,8 @@ public class Tarea
 
     //[NotMapped]
     public string Resumen {get;set;}
+
+    public  bool Terminada { get; set; }
 }
 
 public enum Prioridad
