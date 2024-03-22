@@ -95,4 +95,20 @@ app.MapPut("/api/categorias/{id}", async ([FromServices] TareasContext dbContext
     return Results.NotFound("Error No se Actualizaron los Datos");   
 });
 
+// End Point para eliminar datos de la base de datos
+app.MapDelete("/api/tareas/{id}", async ([FromServices] TareasContext dbContext, [FromRoute] Guid id) =>
+{
+     var tareaActual = dbContext.Tareas.Find(id);
+
+     if(tareaActual!=null)
+     {
+         dbContext.Remove(tareaActual);
+         await dbContext.SaveChangesAsync();
+
+         return Results.Ok("Se elimino el registro correctamente");
+     }
+
+     return Results.NotFound("No se encontro registro");
+});
+
 app.Run();
